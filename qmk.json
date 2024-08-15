@@ -1,4 +1,4 @@
 {
     "userspace_version": "1.0",
-    "build_targets": [["bastardkb/dilemma/3x5_3", "beiku"]]
+    "build_targets": [["bastardkb/dilemma/3x5_3", "vendor"]]
 }

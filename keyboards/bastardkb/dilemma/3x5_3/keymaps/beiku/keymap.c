@@ -147,44 +147,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       KC_BTN3, KC_BTN2, KC_BTN1, KC_BTN1, KC_BTN2, KC_BTN3
   ),
 
-// enum combo_events {
-//     SD_COMBO,    // S + D -> Ctrl + Space
-//     KL_COMBO,    // K + L -> ?
-//     COMBO_LENGTH 
-// };
+enum combo_events {
+    SD_COMBO,    // S + D -> Ctrl + Space
+    KL_COMBO,    // K + L -> ?
+    COMBO_LENGTH 
+};
 
-// const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
-// const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
 
-// combo_t key_combos[COMBO_LENGTH] = {
-//     [SD_COMBO] = COMBO_ACTION(sd_combo),  // S + D -> Ctrl + Space
-//     [KL_COMBO] = COMBO(kl_combo, KC_QUES) // K + L -> ?
-// };
+combo_t key_combos[COMBO_LENGTH] = {
+    [SD_COMBO] = COMBO_ACTION(sd_combo),  // S + D -> Ctrl + Space
+    [KL_COMBO] = COMBO(kl_combo, KC_QUES) // K + L -> ?
+};
 
-// void process_combo_event(uint16_t combo_index, bool pressed) {
-//     switch(combo_index) {
-//         case SD_COMBO:
-//             if (pressed) {
-//                 register_code(KC_LCTL);  
-//                 register_code(KC_SPC);   
-//             } else {
-//                 unregister_code(KC_SPC); 
-//                 unregister_code(KC_LCTL);
-//             }
-//             break;
-//     }
-// }
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    switch(combo_index) {
+        case SD_COMBO:
+            if (pressed) {
+                register_code(KC_LCTL);  
+                register_code(KC_SPC);   
+            } else {
+                unregister_code(KC_SPC); 
+                unregister_code(KC_LCTL);
+            }
+            break;
+    }
+}
 
-// uint16_t get_combo_term(uint16_t index, combo_t *combo) {
-//     switch (index) {
-//         case SD_COMBO:
-//             return 50;
-//         case KL_COMBO:
-//             return 50;
-//         default:
-//             return COMBO_TERM;
-//     }
-// }
+uint16_t get_combo_term(uint16_t index, combo_t *combo) {
+    switch (index) {
+        case SD_COMBO:
+            return 50;
+        case KL_COMBO:
+            return 50;
+        default:
+            return COMBO_TERM;
+    }
+}
 
 // clang-format on
 
