@@ -153,8 +153,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM sd_combo[] = {LSFT_T(KC_S), LALT_T(KC_D), COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {RGUI_T(KC_J), RALT_T(KC_K), COMBO_END};
 
 combo_t key_combos[] = {
   [SD_LANG] = COMBO(sd_combo, C(KC_SPACE)),
