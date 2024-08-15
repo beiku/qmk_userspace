@@ -104,9 +104,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `KC_RPRN`.
  */
   [LAYER_SYMBOLS] = LAYOUT_split_3x5_3(
-    S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    S(KC_6),  S(KC_7), S(KC_8), S(KC_9), S(KC_0), XXXXXXX, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL,
-    KC_GRV, KC_MINS,   KC_EQL, S(KC_LBRC), S(KC_RBRC), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    LSFT(KC_1), LSFT(KC_2), LSFT(KC_3), LSFT(KC_4), LSFT(KC_5), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    LSFT(KC_6),  LSFT(KC_7), LSFT(KC_8), LSFT(KC_9), LSFT(KC_0), XXXXXXX, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL,
+    KC_GRV, KC_MINS,   KC_EQL, LSFT(KC_LBRC), LSFT(KC_RBRC), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                       XXXXXXX,  XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX
   ),
 };
@@ -147,18 +147,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       KC_BTN3, KC_BTN2, KC_BTN1, KC_BTN1, KC_BTN2, KC_BTN3
   ),
 
-// enum combos {
-//   SD_LANG,
-//   JK_QUES,
-// };
+enum combos {
+  SD_LANG,
+  JK_QUES,
+};
 
-// const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
-// const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
 
-// combo_t key_combos[] = {
-//   [SD_LANG] = COMBO(sd_combo, LCTL(KC_SPACE)),
-//   [JK_QUES] = COMBO(jk_combo, LSFT(KC_SLASH)),
-// };
+combo_t key_combos[] = {
+  [SD_LANG] = COMBO(sd_combo, LCTL(KC_SPACE)),
+  [JK_QUES] = COMBO(jk_combo, LSFT(KC_SLASH)),
+};
 
 // clang-format on
 
