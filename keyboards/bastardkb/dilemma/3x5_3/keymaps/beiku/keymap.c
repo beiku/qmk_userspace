@@ -18,14 +18,27 @@
 
 #include QMK_KEYBOARD_H
 
+enum combos {
+  SD_LANG,
+  JK_QUES,
+};
+
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+
+combo_t key_combos[] = {
+  [SD_LANG] = COMBO(sd_combo, LCTL(KC_SPACE)),
+  [JK_QUES] = COMBO(jk_combo, LSFT(KC_SLASH)),
+};
+
 enum dilemma_keymap_layers {
     LAYER_BASE = 0,
-    LAYER_NUMERAL,
     LAYER_FUNCTION,
-    LAYER_SYMBOLS,
     LAYER_NAVIGATION,
     LAYER_MEDIA,
     LAYER_POINTER,
+    LAYER_NUMERAL,
+    LAYER_SYMBOLS,
 };
 
 // Automatically enable sniping-mode on the pointer layer.
@@ -68,20 +81,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 /**
- * \brief Numeral layout.
- *
- * Primary left-hand layer (right home thumb) is numerals and symbols. Numerals
- * are in the standard numpad locations with symbols in the remaining positions.
- * `KC_DOT` is duplicated from the base layer.
- */
-  [LAYER_NUMERAL] = LAYOUT_split_3x5_3(
-    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX, XXXXXXX, KC_PAST, KC_7, KC_8, KC_9, KC_PSLS,
-    KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI,  XXXXXXX, KC_PPLS, KC_4, KC_5, KC_6, KC_PMNS,
-     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX, XXXXXXX, KC_PDOT, KC_1, KC_2, KC_3, KC_EQL,
-                       XXXXXXX, _______, XXXXXXX, KC_ENT, KC_BSPC, KC_0
-  ),
-
-/**
  * \brief Function layer.
  *
  * Secondary right-hand layer has function keys mirroring the numerals on the
@@ -95,21 +94,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_F1,   KC_F2,   KC_F3,  KC_F10,
                       XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX
   ),
-
-  /**
- * \brief Symbols layer.
- *
- * Secondary left-hand layer has shifted symbols in the same locations to reduce
- * chording when using mods with shifted symbols. `KC_LPRN` is duplicated next to
- * `KC_RPRN`.
- */
-  [LAYER_SYMBOLS] = LAYOUT_split_3x5_3(
-    LSFT(KC_1), LSFT(KC_2), LSFT(KC_3), LSFT(KC_4), LSFT(KC_5), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    LSFT(KC_6),  LSFT(KC_7), LSFT(KC_8), LSFT(KC_9), LSFT(KC_0), XXXXXXX, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL,
-    KC_GRV, KC_MINS,   KC_EQL, LSFT(KC_LBRC), LSFT(KC_RBRC), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                      XXXXXXX,  XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX
-  ),
-};
 
 /**
  * \brief Navigation layer.
@@ -147,19 +131,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       KC_BTN3, KC_BTN2, KC_BTN1, KC_BTN1, KC_BTN2, KC_BTN3
   ),
 
-enum combos {
-  SD_LANG,
-  JK_QUES,
+/**
+ * \brief Numeral layout.
+ *
+ * Primary left-hand layer (right home thumb) is numerals and symbols. Numerals
+ * are in the standard numpad locations with symbols in the remaining positions.
+ * `KC_DOT` is duplicated from the base layer.
+ */
+  [LAYER_NUMERAL] = LAYOUT_split_3x5_3(
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PAST, KC_7, KC_8, KC_9, KC_PSLS,
+    KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, XXXXXXX, KC_PPLS, KC_4, KC_5, KC_6, KC_PMNS,
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PDOT, KC_1, KC_2, KC_3, KC_EQL,
+                       XXXXXXX, _______, XXXXXXX, KC_ENT, KC_BSPC, KC_0
+  ),
+
+/**
+ * \brief Symbols layer.
+ *
+ * Secondary left-hand layer has shifted symbols in the same locations to reduce
+ * chording when using mods with shifted symbols. `KC_LPRN` is duplicated next to
+ * `KC_RPRN`.
+ */
+  [LAYER_SYMBOLS] = LAYOUT_split_3x5_3(
+    LSFT(KC_1), LSFT(KC_2), LSFT(KC_3), LSFT(KC_4), LSFT(KC_5), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    LSFT(KC_6),  LSFT(KC_7), LSFT(KC_8), LSFT(KC_9), LSFT(KC_0), XXXXXXX, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL,
+    KC_GRV, KC_MINS,   KC_EQL, LSFT(KC_LBRC), LSFT(KC_RBRC), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                      XXXXXXX,  XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX
+  ),
 };
-
-const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
-
-combo_t key_combos[] = {
-  [SD_LANG] = COMBO(sd_combo, LCTL(KC_SPACE)),
-  [JK_QUES] = COMBO(jk_combo, LSFT(KC_SLASH)),
-};
-
 // clang-format on
 
 #ifdef POINTING_DEVICE_ENABLE
