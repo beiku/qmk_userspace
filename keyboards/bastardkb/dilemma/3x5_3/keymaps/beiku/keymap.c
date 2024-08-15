@@ -18,19 +18,6 @@
 
 #include QMK_KEYBOARD_H
 
-enum combos {
-  SD_LANG,
-  JK_QUES,
-};
-
-const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
-
-combo_t key_combos[] = {
-  [SD_LANG] = COMBO(sd_combo, LCTL(KC_SPACE)),
-  [JK_QUES] = COMBO(jk_combo, LSFT(KC_SLASH)),
-};
-
 enum dilemma_keymap_layers {
     LAYER_BASE = 0,
     LAYER_FUNCTION,
@@ -39,6 +26,11 @@ enum dilemma_keymap_layers {
     LAYER_POINTER,
     LAYER_NUMERAL,
     LAYER_SYMBOLS,
+};
+
+enum combos {
+  SD_LANG,
+  JK_QUES,
 };
 
 // Automatically enable sniping-mode on the pointer layer.
@@ -160,6 +152,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 // clang-format on
+
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+
+combo_t key_combos[] = {
+  [SD_LANG] = COMBO(sd_combo, C(KC_SPACE)),
+  [JK_QUES] = COMBO(jk_combo, S(KC_SLASH)),
+};
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef DILEMMA_AUTO_SNIPING_ON_LAYER
