@@ -35,7 +35,9 @@ enum combos {
   LW_SFT,
   LE_SFT,
   LR_SFT,
-  LT_SFT
+  LT_SFT,
+  SO_SFT,
+  SP_SFT
 };
 
 // Automatically enable sniping-mode on the pointer layer.
@@ -166,6 +168,8 @@ const uint16_t PROGMEM lw_combo[] = {RSFT_T(KC_L), KC_W, COMBO_END};
 const uint16_t PROGMEM le_combo[] = {RSFT_T(KC_L), KC_E, COMBO_END};
 const uint16_t PROGMEM lr_combo[] = {RSFT_T(KC_L), KC_R, COMBO_END};
 const uint16_t PROGMEM lt_combo[] = {RSFT_T(KC_L), KC_T, COMBO_END};
+const uint16_t PROGMEM so_combo[] = {LSFT_T(KC_S), KC_O, COMBO_END};
+const uint16_t PROGMEM sp_combo[] = {LSFT_T(KC_S), KC_P, COMBO_END};
 
 combo_t key_combos[] = {
   [SD_LANG] = COMBO(sd_combo, C(KC_SPACE)),
@@ -175,6 +179,8 @@ combo_t key_combos[] = {
   [LE_SFT] = COMBO(le_combo, S(KC_E)),
   [LR_SFT] = COMBO(lr_combo, S(KC_R)),
   [LT_SFT] = COMBO(lt_combo, S(KC_T)),
+  [SO_SFT] = COMBO(so_combo, S(KC_O)),
+  [SP_SFT] = COMBO(sp_combo, S(KC_P)),
 };
 
 bool get_combo_must_press_in_order(uint16_t combo_index, combo_t *combo) {
@@ -184,6 +190,8 @@ bool get_combo_must_press_in_order(uint16_t combo_index, combo_t *combo) {
         case LE_SFT:
         case LR_SFT:
         case LT_SFT:
+        case SO_SFT:
+        case SP_SFT:
             return true;
         default:
             return false;
