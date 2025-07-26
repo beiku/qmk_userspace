@@ -167,27 +167,27 @@ const uint16_t PROGMEM lr_combo[] = {RSFT_T(KC_L), KC_R, COMBO_END};
 const uint16_t PROGMEM lt_combo[] = {RSFT_T(KC_L), KC_T, COMBO_END};
 
 combo_t key_combos[] = {
-  [SD_LANG] = COMBO(sd_combo, C(KC_SPACE)),
+  // [SD_LANG] = COMBO(sd_combo, C(KC_SPACE)),
   [KL_QUES] = COMBO(kl_combo, S(KC_SLASH)),
-  [LQ_SFT] = COMBO(lq_combo, S(KC_Q)),
-  [LW_SFT] = COMBO(lw_combo, S(KC_W)),
-  [LE_SFT] = COMBO(le_combo, S(KC_E)),
-  [LR_SFT] = COMBO(lr_combo, S(KC_R)),
-  [LT_SFT] = COMBO(lt_combo, S(KC_T)),
+  // [LQ_SFT] = COMBO(lq_combo, S(KC_Q)),
+  // [LW_SFT] = COMBO(lw_combo, S(KC_W)),
+  // [LE_SFT] = COMBO(le_combo, S(KC_E)),
+  // [LR_SFT] = COMBO(lr_combo, S(KC_R)),
+  // [LT_SFT] = COMBO(lt_combo, S(KC_T)),
 };
 
-bool get_combo_must_press_in_order(uint16_t combo_index, combo_t *combo) {
-    switch (combo_index) {
-        case LQ_SFT:
-        case LW_SFT:
-        case LE_SFT:
-        case LR_SFT:
-        case LT_SFT:
-            return true;
-        default:
-            return false;
-    }
-}
+// bool get_combo_must_press_in_order(uint16_t combo_index, combo_t *combo) {
+//     switch (combo_index) {
+//         case LQ_SFT:
+//         case LW_SFT:
+//         case LE_SFT:
+//         case LR_SFT:
+//         case LT_SFT:
+//             return true;
+//         default:
+//             return false;
+//     }
+// }
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef DILEMMA_AUTO_SNIPING_ON_LAYER
