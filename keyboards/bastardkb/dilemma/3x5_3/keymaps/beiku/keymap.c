@@ -58,13 +58,23 @@ enum combos {
 #endif // !POINTING_DEVICE_ENABLE
 
 // clang-format off
-/** \brief QWERTY layout (3 rows, 10 columns). */
+/** \brief QWERTY layout (3 rows, 10 columns). 
+ * ┌────┬────┬────┬────┬────┐    ┌────┬────┬────┬────┬────┐
+ * │  Q │  W │  E │  R │  T │    │  Y │  U │  I │  O │  P │
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │  A │  S │  D │  F │  G │    │  H │  J │  K │  L │  ; │
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │  Z │  X │  C │  V │  B │    │  N │  M │  , │  . │  / │
+ * └────┴────┴────┴────┴────┘    └────┴────┴────┴────┴────┘
+ *           │ Tab│ Spc│ Esc│    │ Ent│ Bsp│ Med│
+ *           └────┴────┴────┘    └────┴────┴────┘
+*/
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT_split_3x5_3(
-               KC_Q,         KC_W,         KC_E,         KC_R,    KC_T,    KC_Y,         KC_U,         KC_I,         KC_O,            KC_P,
-       LCTL_T(KC_A), LSFT_T(KC_S), LALT_T(KC_D), LGUI_T(KC_F),    KC_G,    KC_H, RGUI_T(KC_J), RALT_T(KC_K), RSFT_T(KC_L), RCTL_T(KC_SCLN),
-               PT_Z,         KC_X,         KC_C,         KC_V,    KC_B,    KC_N,         KC_M,      KC_COMM,       KC_DOT,         PT_SLSH,
-                                         KC_TAB,      SPC_NUM, ESC_FUN, ENT_SYM,      BSP_NAV,      CAP_MED
+  KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,        KC_Y,    KC_U,         KC_I,         KC_O,         KC_P,
+  LCTL_T(KC_A), LSFT_T(KC_S), LALT_T(KC_D), LGUI_T(KC_F), KC_G,        KC_H,    RGUI_T(KC_J), RALT_T(KC_K), RSFT_T(KC_L), RCTL_T(KC_SCLN),
+  PT_Z,         KC_X,         KC_C,         KC_V,         KC_B,        KC_N,    KC_M,         KC_COMM,      KC_DOT,       PT_SLSH,
+                              KC_TAB,       SPC_NUM,      ESC_FUN,     ENT_SYM, BSP_NAV,      CAP_MED
   ),
 
 /*
@@ -79,26 +89,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /**
  * \brief Function layer.
- *
- * Secondary right-hand layer has function keys mirroring the numerals on the
- * primary layer with extras on the pinkie column, plus system keys on the inner
- * column. App is on the tertiary thumb key and other thumb keys are duplicated
- * from the base layer to enable auto-repeat.
+ * ┌────┬────┬────┬────┬────┐    ┌────┬────┬────┬────┬────┐
+ * │  1 │  2 │  3 │  4 │  5 │    │    │ F7 │ F8 │ F9 │ F12│
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │  6 │  7 │  8 │  9 │  0 │    │    │ F4 │ F5 │ F6 │ F11│
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │    │    │    │    │    │    │    │ F1 │ F2 │ F3 │ F10│
+ * └────┴────┴────┴────┴────┘    └────┴────┴────┴────┴────┘
+ *           │    │    │  ▼ │    │ Del│    │    │
+ *           └────┴────┴────┘    └────┴────┴────┘
  */
   [LAYER_FUNCTION] = LAYOUT_split_3x5_3(
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_F7,   KC_F8,   KC_F9,  KC_F12,
-    KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX,   KC_F4,   KC_F5,   KC_F6,  KC_F11,
+    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    XXXXXXX,   KC_F7,   KC_F8,   KC_F9,  KC_F12,
+    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,   KC_F4,   KC_F5,   KC_F6,  KC_F11,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   KC_F1,   KC_F2,   KC_F3,  KC_F10,
                       XXXXXXX, XXXXXXX, _______, XXXXXXX,  KC_DEL, XXXXXXX
   ),
 
 /**
  * \brief Navigation layer.
- *
- * Primary right-hand layer (left home thumb) is navigation and editing. Cursor
- * keys are on the home position, line and page movement below, clipboard above,
- * caps lock and insert on the inner column. Thumb keys are duplicated from the
- * base layer to avoid having to layer change mid edit and to enable auto-repeat.
+ * ┌────┬────┬────┬────┬────┐    ┌────┬────┬────┬────┬────┐
+ * │    │    │    │    │    │    │    │    │  ↑ │    │    │
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │ Ctl│Shft│ Alt│ Gui│    │    │    │  ← │  ↓ │  → │    │
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │    │    │    │    │    │    │ Ins│Home│PgDn│PgUp│ End│
+ * └────┴────┴────┴────┴────┘    └────┴────┴────┴────┴────┘
+ *           │    │    │    │    │    │  ▼ │    │
+ *           └────┴────┴────┘    └────┴────┴────┘
  */
   [LAYER_NAVIGATION] = LAYOUT_split_3x5_3(
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_UP, XXXXXXX, XXXXXXX,
@@ -109,9 +127,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /**
  * \brief Media layer.
- *
- * Tertiary left- and right-hand layer is media and RGB control.  This layer is
- * symmetrical to accomodate the left- and right-hand trackball.
+ * ┌────┬────┬────┬────┬────┐    ┌────┬────┬────┬────┬────┐
+ * │    │RMOD│ TOG│ MOD│    │    │    │RMOD│ TOG│ MOD│    │
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │MPRV│VOLD│MUTE│VOLU│MNXT│    │MPRV│VOLD│MUTE│VOLU│MNXT│
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │    │    │    │    │    │    │    │    │    │    │    │
+ * └────┴────┴────┴────┴────┘    └────┴────┴────┴────┴────┘
+ *           │    │MPLY│MSTP│    │MSTP│MPLY│  ▼ │
+ *           └────┴────┴────┘    └────┴────┴────┘
  */
   [LAYER_MEDIA] = LAYOUT_split_3x5_3(
     XXXXXXX,RGB_RMOD, RGB_TOG, RGB_MOD, XXXXXXX, XXXXXXX,RGB_RMOD, RGB_TOG, RGB_MOD, XXXXXXX,
@@ -120,20 +144,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       XXXXXXX, KC_MPLY, KC_MSTP, KC_MSTP, KC_MPLY, _______
   ),
 
-/** \brief Mouse emulation and pointer functions. */
+/** \brief Mouse emulation and pointer functions. 
+ * ┌────┬────┬────┬────┬────┐    ┌────┬────┬────┬────┬────┐
+ * │BOOT│ CLR│    │ DPI│ S_D│    │ S_D│ DPI│    │ CLR│BOOT│
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │ Ctl│Shft│ Alt│ Gui│    │    │    │ Gui│ Alt│Shft│ Ctl│
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │  ▼ │DSCR│SNIP│BTN3│BTN2│    │    │BTN3│SNIP│DSCR│  ▼ │
+ * └────┴────┴────┴────┴────┘    └────┴────┴────┴────┴────┘
+ *           │BTN3│BTN2│BTN1│    │BTN1│BTN2│BTN3│
+ *           └────┴────┴────┘    └────┴────┴────┘
+*/
   [LAYER_POINTER] = LAYOUT_split_3x5_3(
     QK_BOOT,  EE_CLR, XXXXXXX, DPI_MOD, S_D_MOD, S_D_MOD, DPI_MOD, XXXXXXX,  EE_CLR, QK_BOOT,
-    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, XXXXXXX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
+    KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, XXXXXXX, XXXXXXX, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL,
     _______, DRGSCRL, SNIPING, KC_BTN3, XXXXXXX, XXXXXXX, KC_BTN3, SNIPING, DRGSCRL, _______,
                       KC_BTN3, KC_BTN2, KC_BTN1, KC_BTN1, KC_BTN2, KC_BTN3
   ),
 
 /**
  * \brief Numeral layout.
- *
- * Primary left-hand layer (right home thumb) is numerals and symbols. Numerals
- * are in the standard numpad locations with symbols in the remaining positions.
- * `KC_DOT` is duplicated from the base layer.
+ * ┌────┬────┬────┬────┬────┐    ┌────┬────┬────┬────┬────┐
+ * │    │    │    │    │    │    │  * │  7 │  8 │  9 │  / │
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │ Ctl│Shft│ Alt│ Gui│    │    │  + │  4 │  5 │  6 │  - │
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │    │    │    │    │    │    │  . │  1 │  2 │  3 │  = │
+ * └────┴────┴────┴────┴────┘    └────┴────┴────┴────┴────┘
+ *           │    │  ▼ │    │    │ Ent│  0 │ Bsp│
+ *           └────┴────┴────┘    └────┴────┴────┘
  */
   [LAYER_NUMERAL] = LAYOUT_split_3x5_3(
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PAST, KC_7, KC_8, KC_9, KC_PSLS,
@@ -144,10 +183,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /**
  * \brief Symbols layer.
- *
- * Secondary left-hand layer has shifted symbols in the same locations to reduce
- * chording when using mods with shifted symbols. `KC_LPRN` is duplicated next to
- * `KC_RPRN`.
+ * ┌────┬────┬────┬────┬────┐    ┌────┬────┬────┬────┬────┐
+ * │  ! │  @ │  # │  $ │  % │    │    │    │  [ │  ] │  ' │
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │  ^ │  & │  * │  ( │  ) │    │    │ Gui│ Alt│Shft│ Ctl│
+ * ├────┼────┼────┼────┼────┤    ├────┼────┼────┼────┼────┤
+ * │  ` │  - │  = │  { │  } │    │    │    │  < │  > │  \ │
+ * └────┴────┴────┴────┴────┘    └────┴────┴────┴────┴────┘
+ *           │    │    │    │    │  ▼ │    │    │
+ *           └────┴────┴────┘    └────┴────┴────┘
  */
   [LAYER_SYMBOLS] = LAYOUT_split_3x5_3(
     LSFT(KC_1), LSFT(KC_2), LSFT(KC_3), LSFT(KC_4), LSFT(KC_5), XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_QUOT,
